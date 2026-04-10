@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Para ti ❤️</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      height: 100vh;
+      overflow: hidden;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .stars {
+      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+    .shooting-star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      animation: shoot 3s linear infinite;
+    }
+    @keyframes shoot {
+      0% { transform: translate(0, 0); opacity: 1; }
+      100% { transform: translate(300px, 300px); opacity: 0; }
+    }
+    .center-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #fff;
+      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 40px #ff1493;
+      z-index: 10;
+      animation: pulse 2s infinite;
+    }
+    .center-text h1 {
+      font-size: 5rem;
+      margin-bottom: 1rem;
+    }
+    .center-text p {
+      font-size: 1.8rem;
+      opacity: 0.9;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.05); }
+    }
+    .word {
+      position: absolute;
+      color: #ffc0cb;
+      font-size: 1.3rem;
+      opacity: 0;
+      animation: floatUp 8s linear infinite;
+      text-shadow: 0 0 8px #ff69b4;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  
+  <div class="center-text">
+    <h1>Te Amo</h1>
+    <p>Mi universo completo eres tú</p>
+  </div>
+
+  <script>
+    const starsContainer = document.getElementById('stars');
+    
+    // 200 estrellas fijas
+    for (let i = 0; i < 200; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 3 + 1 + 'px';
+      star.style.width = size;
+      star.style.height = size;
+      star.style.top = Math.random() * 100 + '%';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starsContainer.appendChild(star);
+    }
+
+    // Estrellas fugaces cada 2 segundos
+    setInterval(() => {
+      const shooting = document.createElement('div');
+      shooting.className = 'shooting-star';
+      shooting.style.top = Math.random() * 50 + '%';
+      shooting.style.left = Math.random() * 50 + '%';
+      shooting.style.boxShadow = '0 0 10px 2px white';
+      document.body.appendChild(shooting);
+      setTimeout(() => shooting.remove(), 3000);
+    }, 2000);
+
+    // Palabras bonitas que suben
+    const palabras = [
+      'amor', 'siempre', 'contigo', 'infinito', 'mi vida', 'eres todo',
+      'para siempre', 'mi corazón', 'te adoro', 'mi sol', 'mi luna', '💖',
+      'mi estrella', 'perfecta', 'preciosa', 'única', 'mi sueño', 'eterno',
+      'tú y yo', 'destino', 'almas gemelas', 'mi paz', 'te quiero', '✨'
+    ];
+
+    function crearPalabra() {
+      const word = document.createElement('div');
+      word.className = 'word';
+      word.textContent = palabras[Math.floor(Math.random() * palabras.length)];
+      word.style.left = Math.random() * 90 + 5 + '%';
+      word.style.animationDuration = (Math.random() * 4 + 6) + 's';
+      word.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
+      document.body.appendChild(word);
+      setTimeout(() => word.remove(), 8000);
+    }
+
+    // Crear una palabra nueva cada 400ms
+    setInterval(crearPalabra, 400);
+  </script>
+</body>
+</html>
